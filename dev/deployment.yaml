@@ -1,21 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-deployment
+  name: myapp
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: myapp
+  replicas: 3
   template:
     metadata:
       labels:
         app: myapp
     spec:
       containers:
-        - name: myapp-container
-          image: python:3.9
-          ports:
-            - containerPort: 5000
-          command: ["python", "-u"]
-          args: ["-m", "flask", "run", "--host=0.0.0.0", "--port=5000"]
+      - name: myapp
+        image: nanajanashia/argocd-app:1.2
+        ports:
+        - containerPort: 8080
